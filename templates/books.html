@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Moja biblioteka: aktualna liczba {{count}}</title>
+    <style>
+        table, th, tr, td {border: 1px solid rgb(104, 4, 104); font-family: Arial, Helvetica, sans-serif; font-size: 12px; padding: 3px}
+        th {border: 1px solid rgb(104, 4, 104); font-family: Arial, Helvetica, sans-serif; font-size: 14px; background-color: rgb(120, 214, 76) ;}
+        h1, h2 {font-family: Verdana, Geneva, Tahoma, sans-serif }
+        input#button {float: right; padding: 5px 25px 5px 25px; background-color: rgb(199, 9, 199);}
+        div {max-width: 300px; margin: 5px 0 0 20px;}
+    </style>
+</head>
+<body>
+<h2>Moja biblioteka (liczba książek: {{ count }})</h2>
+
+<table>
+    <thead>
+    <th>Tytuł</th>
+    <th>Autor</th>
+    <th>Rodzaj gatunku</th>
+    <th>Liczba stron</th>
+    <th>Rok wydania</th>
+    <th>Przeczytana</th>
+    <th>Okładka</th>
+    <th>Stan książki</th>
+    <th>Ostatnio czytane</th>
+    </thead>
+{% for book in books %}
+    <tr>
+        <td><a href="/books/{{ loop.index }}">{{ book.title }}</a></td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.categories }}</td>
+        <td>{{ book.pages }}</td>
+        <td>{{ book.year_published }}</td>
+        <td>{{ book.read }}</td>
+        <td>{{ book.cover }}</td>
+        <td>{{ book.condition }}</td>
+        <td>{{ book.last_read }}</td>
+    </tr>
+{% endfor %}
+</table>
+<div>
+    <h2> Dodaj nową (nr: {{count+1}}): </h2>
+    <form method="POST" action="/books/">
+        {{ form.hidden_tag() }}
+        <table>
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                <tr>
+                    <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                    <td>{{ field }}</td>
+                </tr>
+            {% endfor %}              
+        </table>
+        <input id="button" type="submit" value="Dodaj">
+    </form>
+</div>
+</body>
+</html>
