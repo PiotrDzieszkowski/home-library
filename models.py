@@ -11,9 +11,15 @@ class Books:
     def all(self):
         return self.books
 
+
     def get(self, id):
+        if id in self.books
         return self.books[id]
-    
+#   def get(self, id):
+#       book = [book for book in self.all() if book['id'] == id]
+#       if book:
+#           return book[0]
+#       return []
     def count(self):
          return len(self.books)
 

@@ -42,7 +42,7 @@
 </table>
 <div>
     <h2> Dodaj nową (nr: {{count+1}}): </h2>
-    <form method="POST" action="/books/">
+    <form method="POST" action="/todos/">
         {{ form.hidden_tag() }}
         <table>
             {% for field in form if field.widget.input_type != 'hidden' %}
